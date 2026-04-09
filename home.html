@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneFit | FORJANDO SUA DISCIPLINA</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/home.css">
+</head>
+
+<body>
+
+  <header>
+    <!-- ===================================================== -->
+    <!-- NAVBAR = Barra de navegação do topo -->
+    <!-- ===================================================== -->
+
+    <!-- navbar = classe do bootstrap para barra de navegação
+navbar-expand-lg = expande no desktop e vira menu no mobile
+navbar-dark = texto claro
+fixed-top = fica fixa no topo
+nav-blur = classe personalizada -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-blur">
+
+      <!-- container = centraliza o conteúdo -->
+      <div class="container">
+
+        <!-- Logo + nome do site -->
+        <!-- navbar-brand = marca do site -->
+        <!-- d-flex = flexbox -->
+        <!-- align-items-center = alinha verticalmente -->
+        <!-- gap-2 = espaço entre itens -->
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#inicio">
+
+          <!-- Logo -->
+          <img src="./img/logo_onefit.png" class="logo_navbar" alt="">
+
+          <!-- Nome -->
+          OneFit
+        </a>
+
+
+        <!-- Botão que aparece no celular para abrir menu -->
+        <!-- navbar-toggler = botão do menu mobile -->
+        <!-- data-bs-toggle = ativa o bootstrap -->
+        <!-- data-bs-target = qual menu ele abre -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+          aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menu">
+
+          <!-- ícone do botão -->
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <!-- Menu que abre e fecha no mobile -->
+        <!-- collapse = escondido no mobile -->
+        <!-- navbar-collapse = estilo bootstrap -->
+        <div class="collapse navbar-collapse" id="navMenu">
+
+          <!-- Lista do menu -->
+          <!-- ms-auto = joga para direita -->
+          <!-- gap-3 = espaço entre itens -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
+
+            <!-- Cada item do menu -->
+            <li class="nav-item">
+              <a class="nav-link" href="#inicio">Início</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#planos">Planos</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#profissional">Profissionais</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#sobre">Sobre Nós</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#localizacao">Localização</a>
+            </li>
+
+
+            <!-- Botão de login -->
+            <a href="login.html" class="botao_login">
+
+              <!-- ícone -->
+              <img src="./img/person-circle.svg" alt="Login">
+
+              <!-- texto -->
+              <span class="texto_login">Login</span>
+
+            </a>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+
+  <main>
+    <!-- ===================================================== -->
+    <!-- HERO -->
+    <!-- ===================================================== -->
+    <section class="hero" id="inicio">
+
+      <!-- Vídeo de fundo -->
+      <!-- autoplay = começa sozinho
+       muted = sem som
+       loop = repete
+       playsinline = funciona no celular -->
+      <video class="hero-video" autoplay muted loop playsinline>
+
+        <source src="https://files.cdn-files-a.com/uploads/11603107/normal_pb-69a628a7a7b38.mp4" type="video/mp4">
+
+        Seu navegador não suporta vídeo
+
+      </video>
+
+
+      <!-- efeito de fade -->
+      <div class="hero-fade-left"></div>
+
+      <!-- camada escura sobre o vídeo -->
+      <div class="hero-overlay"></div>
+
+      <!-- efeito de partículas -->
+      <div class="hero-sparks" id="sparks"></div>
+
+
+
+      <!-- container principal -->
+      <div class="container" id="hero-container">
+
+        <div class="row align-items-center g-4">
+
+
+          <!-- TEXTO ESQUERDA -->
+          <div class="col-lg-7 hero-content m-0">
+
+            <!-- badge pequeno -->
+            <div class="hero-badge">
+
+              <!-- bolinha -->
+              <span style="width:10px;height:10px;border-radius:999px;
+            background:rgba(var(--gold-glow),.95);
+            box-shadow:0 0 0 6px rgba(var(--gold-glow),.12)">
+              </span>
+
+              Academia • Performance • Disciplina
+
+            </div>
+
+
+            <!-- título -->
+            <h1 class="display-5 mt-3">
+              Bem-vindo à OneFit
+            </h1>
+
+            <h2 class="h5">
+              FORJANDO SUA DISCIPLINA
+            </h2>
+
+
+            <!-- descrição -->
+            <p class="mt-3">
+              Treinos inteligentes, acompanhamento e um ambiente motivador
+              para você evoluir com consistência.
+            </p>
+
+
+            <!-- botões -->
+            <div class="d-flex flex-wrap gap-2 mt-3">
+
+              <a href="#planos" class="btn btn-gold btn-anim btn-fixed btn-quero-comecar">
+
+                QUERO COMEÇAR
+
+              </a>
+
+
+              <a href="#sobre" class="btn btn-outline-light btn-anim btn-fixed" style="border-radius:12px;
+             border-color:rgba(255,255,255,.18);">
+
+                SABER MAIS
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- PLANOS -->
+    <!-- ===================================================== -->
+    <section id="planos" data-aos="fade-up">
+
+      <div class="planos-titulo">
+        <h2>Nossos Planos</h2>
+        <p>Escolha o plano ideal para sua evolução</p>
+      </div>
+
+      <div class="carrossel-planos">
+
+        <button class="btn left" id="seta-left-carrossel-planos" onclick="moveLeftPlanos()" style="color: #fff;">◀</button>
+
+
+        <div class="carrossel-window-planos">
+
+          <div class="carrossel-card" id="carrossel-card-planos">
+
+            <div class="plano-card" data-aos="fade-up" data-plan-key="BRONZE" data-plan-name="Bronze" data-plan-price="79.00">
+              <h3 class="plano-nome">Bronze</h3>
+              <p class="plano-preco">R$ 79<span>/mês</span></p>
+
+              <ul class="plano-beneficios">
+                <li>Musculação livre</li>
+                <li>Avaliação física</li>
+                <li>Acesso horário normal</li>
+              </ul>
+
+              <a href="./matricula.html">
+                <button class="plano-btn w-100">Matricule-se</button>
+              </a>
+            </div>
+
+
+            <div class="plano-card" data-aos="fade-up" data-plan-key="PRATA" data-plan-name="Prata" data-plan-price="99.00">
+              <h3 class="plano-nome">Prata</h3>
+              <p class="plano-preco">R$ 99<span>/mês</span></p>
+
+              <ul class="plano-beneficios">
+                <li>Musculação</li>
+                <li>Aeróbico</li>
+                <li>Avaliação física</li>
+                <li>Treino personalizado</li>
+              </ul>
+
+              <a href="./matricula.html">
+                <button class="plano-btn w-100">Matricule-se</button>
+              </a>
+            </div>
+
+
+            <div class="plano-card" data-aos="fade-up" data-plan-key="GOLD" data-plan-name="Gold" data-plan-price="129.00">
+              <h3 class="plano-nome">Gold</h3>
+              <p class="plano-preco">R$ 129<span>/mês</span></p>
+
+              <ul class="plano-beneficios">
+                <li>Musculação</li>
+                <li>Aeróbico</li>
+                <li>Aulas em grupo</li>
+                <li>Avaliação física</li>
+              </ul>
+
+              <a href="./matricula.html">
+                <button class="plano-btn w-100">Matricule-se</button>
+              </a>
+            </div>
+
+
+            <div class="plano-card" data-aos="fade-up" data-plan-key="PREMIUM" data-plan-name="Premium" data-plan-price="159.00">
+              <h3 class="plano-nome">Premium</h3>
+              <p class="plano-preco">R$ 159<span>/mês</span></p>
+
+              <ul class="plano-beneficios">
+                <li>Tudo liberado</li>
+                <li>Personal incluso</li>
+                <li>Acesso total</li>
+                <li>Aulas VIP</li>
+              </ul>
+
+              <a href="./matricula.html">
+                <button class="plano-btn w-100">Matricule-se</button>
+              </a>
+            </div>
+
+
+            <div class="plano-card" data-aos="fade-up" data-plan-key="BLACK" data-plan-name="Black" data-plan-price="199.00">
+              <h3 class="plano-nome">Black</h3>
+              <p class="plano-preco">R$ 199<span>/mês</span></p>
+
+              <ul class="plano-beneficios">
+                <li>Tudo liberado</li>
+                <li>Personal premium</li>
+                <li>24h acesso</li>
+                <li>Área exclusiva</li>
+              </ul>
+
+              <a href="./matricula.html">
+                <button class="plano-btn w-100">Matricule-se</button>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button class="btn right" id="seta-right-carrossel-planos" onclick="moveRightPlanos()" style="color: #fff;">▶</button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- PROFISSIONAL -->
+    <!-- ===================================================== -->
+    <section id="profissional" data-aos="fade-up">
+      <div class="profissional-titulo">
+        <h2>Conheça a nossa equipe</h2>
+        <p>Conheça nossos profissionais e seus trabalhos</p>
+      </div>
+
+      <div class="carrossel-profissional">
+
+        <button class="btn left" id="seta-left-carrossel-profissional" onclick="moveLeftProfissional()" style="color: #fff;">◀</button>
+
+
+        <div class="carrossel-window-profissional">
+
+          <div class="carrossel-card" id="carrossel-card-profissional">
+
+            <!-- PROFISSIONAL 1 -->
+            <div class="card-profissional" data-aos="fade-up">
+
+              <div class="foto-profissional">
+                <img src="img/personal-trainer.png">
+              </div>
+
+              <h3 class="nome-profissional">Carlos Silva</h3>
+
+              <p class="funcao-profissional">Personal Trainer</p>
+
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+
+            </div>
+
+
+            <!-- PROFISSIONAL 2 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/instrutura-de-musculacao.png">
+              </div>
+
+              <h3 class="nome-profissional">Juliana Rocha</h3>
+              <p class="funcao-profissional">Instrutora de Musculação</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+
+            <!-- PROFISSIONAL 3 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/professora_dança.png">
+              </div>
+
+              <h3 class="nome-profissional">Fernanda Alves</h3>
+              <p class="funcao-profissional">Professora de Dança</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+
+            <!-- PROFISSIONAL 4 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/nutricionista.png">
+              </div>
+
+              <h3 class="nome-profissional">Ricardo Souza</h3>
+              <p class="funcao-profissional">Nutricionista</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+
+            <!-- PROFISSIONAL 5 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/professor-funcional.png">
+              </div>
+
+              <h3 class="nome-profissional">Bruno Martins</h3>
+              <p class="funcao-profissional">Professor de Funcional</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+            <!-- PROFISSIONAL 6 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/professor-cross-training.png">
+              </div>
+
+              <h3 class="nome-profissional">Marcos Lima</h3>
+              <p class="funcao-profissional">Professor de Cross Training</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+
+            <!-- PROFISSIONAL 7 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/professora-pilates.png">
+              </div>
+
+              <h3 class="nome-profissional">Patricia Gomes</h3>
+              <p class="funcao-profissional">Instrutora de Pilates</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+
+            <!-- PROFISSIONAL 8 -->
+            <div class="card-profissional" data-aos="fade-up">
+              <div class="foto-profissional">
+                <img src="img/fisioterapeuta-esportivo.png">
+              </div>
+
+              <h3 class="nome-profissional">André Carvalho</h3>
+              <p class="funcao-profissional">Fisioterapeuta Esportivo</p>
+              <p class="info-profissional">
+                Especialista em hipertrofia e emagrecimento
+              </p>
+
+              <p class="info-profissional">
+                8 anos de experiência
+              </p>
+
+              <p class="info-profissional">
+                CREF: 123456-G/SP
+              </p>
+
+              <a href="https://wa.me/5512991111111" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <button class="btn right" id="seta-right-carrossel-profissional" onclick="moveRightProfissional()" style="color: #fff;">▶</button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- NOSSO ESPAÇO -->
+    <!-- ===================================================== -->
+    <section id="espaco" data-aos="fade-up">
+      <div class="espaco-titulo">
+        <h2>Conheça o nosso espaço</h2>
+        <p>Conheça nosso espaço e veja nossa estrutura.</p>
+      </div>
+
+      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="2000">
+            <img src="./img/faixada-img.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="./img/aparelhos-img.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="./img/banheiro-img.png" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- SOBRE NOS -->
+    <!-- ===================================================== -->
+    <section id="sobre" data-aos="fade-up">
+      <div class="sobre-titulo">
+        <h2>Sobre Nós</h2>
+        <p>Conheça e entenda um pouco mais sobre nossa missão, visão e valores.</p>
+      </div>
+
+
+      <div class="cards-sobre">
+
+
+        <!-- MISSÃO -->
+        <div class="card-container" data-aos="fade-up-right">
+          <div class="card-missao">
+
+            <div class="card-face card-front">
+              <h2>MISSÃO</h2>
+            </div>
+
+            <div class="card-face card-back">
+              <p>
+                Transformar vidas através do treino,
+                promovendo saúde, disciplina e evolução
+                física e mental em um ambiente moderno
+                e de alto padrão.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- VISÃO -->
+        <div class="card-container" data-aos="fade-up">
+          <div class="card-missao">
+
+            <div class="card-face card-front">
+              <h2>VISÃO</h2>
+            </div>
+
+            <div class="card-face card-back">
+              <p>
+                Ser referência em treinamento e qualidade
+                de vida, oferecendo estrutura moderna,
+                motivação e acompanhamento profissional.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- VALORES -->
+        <div class="card-container" data-aos="fade-up-left">
+          <div class="card-missao">
+
+            <div class="card-face card-front">
+              <h2>VALORES</h2>
+            </div>
+
+            <div class="card-face card-back">
+              <p>
+                Disciplina, respeito, dedicação,
+                compromisso com resultados,
+                saúde e excelência no atendimento.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- LOCALIZAÇÃO -->
+    <!-- ===================================================== -->
+    <section id="localizacao" data-aos="fade-up">
+
+      <div class="localizacao-titulo">
+        <h2>Localização</h2>
+      </div>
+
+      <div class="mapa-container">
+
+        <iframe src="https://www.google.com/maps?q=Aquarius+S%C3%A3o+Jos%C3%A9+dos+Campos&output=embed" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+      </div>
+
+    </section>
+  </main>
+
+
+  <!-- ===================================================== -->
+  <!-- FOOTER -->
+  <!-- ===================================================== -->
+  <footer class="py-4">
+    <!-- py-4 = padding vertical -->
+
+    <div class="container">
+
+      <div class="row g-3 align-items-center">
+        <!-- row = linha bootstrap -->
+        <!-- g-3 = espaço entre colunas -->
+
+
+        <!-- LADO ESQUERDO -->
+        <div class="col-md-6">
+
+          <!-- nome do site -->
+          <div class="fw-bold" style="color:#fff;">
+            OneFit
+          </div>
+
+          <!-- direitos autorais -->
+          <div class="small" style="color:rgba(255,255,255,.70)">
+
+            Direitos autorais ©
+            <span id="year"></span>
+            <!-- ano automático via JS -->
+
+            • Todos os direitos reservados
+
+          </div>
+
+        </div>
+
+
+
+        <!-- LADO DIREITO -->
+        <div class="col-md-6 text-md-end">
+
+          <!-- links do footer -->
+
+          <a class="footer-link me-3" href="#inicio">
+            Início
+          </a>
+
+          <a class="footer-link me-3" href="#sobre">
+            Sobre
+          </a>
+
+          <a class="footer-link me-3" href="#planos">
+            Planos
+          </a>
+
+          <a class="footer-link" href="#profissionais">
+            Profissionais
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+
+
+
+  <!-- links: bootstrap e javascript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/catalogoPublico.js"></script>
+  <script src="./js/home.js"></script>
+
+  <!-- Animações do AOS JS (para os plano-card)-->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ONE FIT | Área do Profissional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/perfilProfissional.css" />
+</head>
+
+<body>
+  <div class="container py-3">
+
+    <!-- MOBILE TOPBAR -->
+    <div class="mobile-topbar">
+      <div class=" d-flex align-items-center justify-content-between p-3">
+        <div class="d-flex align-items-center gap-3">
+          <img src="./img/logo_onefit.png" class="logo" alt="ONE FIT">
+          <div class="d-none d-sm-block">
+            <div class="mobile-title">Área do Profissional</div>
+            <div class="small text-muted">Painel premium</div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 align-items-center ">
+          <button class="btn btn-gold btn-anim h44 px-3" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu">
+            <i class="bi bi-list me-1"></i> 
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER (desktop) -->
+    <div class="text-center mb-3 d-none d-lg-block">
+      <img src="./img/logo_onefit.png" class="logo mb-2" alt="ONE FIT">
+      <h4 class="fw-bold mb-1">Área do Profissional</h4>
+      <p class="text-muted mb-0">Organize agenda, ponto, pagamentos e contrato em um só lugar.</p>
+    </div>
+    <div class="app-shell">
+    
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar glass d-none d-lg-block">
+        <div class="brand-mini">
+          <div class="brand-dot"></div>
+          <div class="min-w-0">
+            <h6>ONE FIT</h6>
+          </div>
+
+          <button class="btn btn-soft btn-anim h40 px-3 ms-auto" onclick="logout()" title="Sair">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="nav-rail" id="navRail">
+          <button class="nav-itemx" data-view="view-resumo">
+            <div class="nav-ico"><i class="bi bi-speedometer2"></i></div>
+            <div class="nav-txt">
+              <div class="t">Resumo</div>
+              <div class="s">Visão geral</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-contrato">
+            <div class="nav-ico"><i class="bi bi-file-earmark-text"></i></div>
+            <div class="nav-txt">
+              <div class="t">Contrato</div>
+              <div class="s">Status com a academia</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-carga">
+            <div class="nav-ico"><i class="bi bi-clock-history"></i></div>
+            <div class="nav-txt">
+              <div class="t">Carga horária</div>
+              <div class="s">Horas do mês</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-ponto">
+            <div class="nav-ico"><i class="bi bi-fingerprint"></i></div>
+            <div class="nav-txt">
+              <div class="t">Cartão de ponto</div>
+              <div class="s">Bater entrada/saída</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-salarios">
+            <div class="nav-ico"><i class="bi bi-cash-stack"></i></div>
+            <div class="nav-txt">
+              <div class="t">Salários</div>
+              <div class="s">Histórico de pagamentos</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-agenda">
+            <div class="nav-ico"><i class="bi bi-list-check"></i></div>
+            <div class="nav-txt">
+              <div class="t">Minha agenda</div>
+              <div class="s">Alunos e horários</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-cashback">
+            <div class="nav-ico"><i class="bi bi-piggy-bank"></i></div>
+            <div class="nav-txt">
+              <div class="t">Meu cashback</div>
+              <div class="s">Saldo e extrato</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-compras">
+            <div class="nav-ico"><i class="bi bi-bag-check"></i></div>
+            <div class="nav-txt">
+              <div class="t">Minhas compras</div>
+              <div class="s">Pedidos, entregas e pós-venda</div>
+            </div>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main-stage glass">
+
+
+
+        <!-- =========================
+             VIEWS
+             ========================= -->
+
+        <!-- RESUMO -->
+        <section class="view is-active" id="view-resumo">
+          <div class="card p-4 js-stagger">
+            <h6 class=" text-center fw-bold section-title mb-2">DASHBOARD</h6>
+          
+          </div>
+
+          <div class="card p-4 js-stagger mt-3">
+            <div class="row g-3">
+              <div class="col-lg-4">
+                <div class="kpi-mini">
+                  <div class="lab">Contrato</div>
+                  <div class="num" id="kpiContrato">Ativo</div>
+                  <div class="sub">Vigência: <span id="kpiVigencia">—</span></div>
+                  <div class="bar"><i id="barContrato"></i></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="kpi-mini">
+                  <div class="lab">Horas (mês)</div>
+                  <div class="num"><span id="kpiHoras">0</span>h</div>
+                  <div class="sub">Meta: <span id="kpiHorasMeta">0</span>h</div>
+                  <div class="bar"><i id="barHoras"></i></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="kpi-mini">
+                  <div class="lab">Cashback</div>
+                  <div class="num">R$ <span id="kpiCashback">0,00</span></div>
+                  <div class="sub">Saldo disponível</div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="row g-3">
+              <div class="col-lg-6">
+                <div class="kpi-mini">
+                  <div class="lab">Próximo horário</div>
+                  <div class="num num-sm" id="kpiNextSlot">—</div>
+                  <div class="sub">Agenda particular</div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="kpi-mini">
+                  <div class="lab">Último ponto</div>
+                  <div class="num num-sm" id="kpiLastPunch">—</div>
+                  <div class="sub">Entrada/saída mais recente</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTRATO -->
+        <section class="view" id="view-contrato">
+          <div class="card p-4 js-stagger">
+            <div class="mb-2">
+              <h6 class="fw-bold section-title mb-2">Status de contrato da academia</h6>
+              <p class="text-muted mb-2">Vigência de contrato.</p>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="kpi-mini">
+                  <div class="lab">Status</div>
+                  <div class="num" id="contractStatusLabel">Ativo</div>
+                  <div class="sub" id="contractStatusHint">Acesso liberado para atuar.</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="kpi-mini">
+                  <div class="lab">Vigência</div>
+                  <div class="num num-sm" id="contractRange">—</div>
+                  <div class="sub">Renovação automática</div>
+                </div>
+              </div>
+        </section>
+
+        <!-- CARGA HORÁRIA -->
+        <section class="view" id="view-carga">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div>
+                <h6 class="fw-bold section-title mb-1">Carga horária</h6>
+                <p class="text-muted mb-0">Lançamentos automáticos de pontos e horas.</p>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+
+                <button class="btn btn-gold btn-anim h40 px-3" onclick="exportHoursCSV()">
+                  <i class="bi bi-download me-2"></i>EXPORTAR CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="kpi-mini">
+                  <div class="lab">Horas acumuladas</div>
+                  <div class="num"><span id="hoursTotal">0</span>h</div>
+                  <div class="sub">No mês atual</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="kpi-mini">
+                  <div class="lab">Meta</div>
+                  <div class="num"><span id="hoursGoal">0</span>h</div>
+                  <div class="sub">Contrato</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="kpi-mini">
+                  <div class="lab">Progresso</div>
+                  <div class="num"><span id="hoursPct">0</span>%</div>
+                  <div class="sub">Atingimento</div>
+                  <div class="bar"><i id="hoursBar"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Horas</th>
+                    <th>Origem</th>
+                    <th>Obs.</th>
+                  </tr>
+                </thead>
+                <tbody id="hoursTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- CARTÃO DE PONTO -->
+        <section class="view" id="view-ponto">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div>
+                <h6 class="fw-bold section-title mb-1">Cartão de ponto</h6>
+                <p class="text-muted mb-0">Insira suas entradas e saídas.</p>
+              </div>
+
+              <div class="d-flex gap-2 flex-wrap">
+                <button id="btnPunchIn" class="btn btn-gold btn-anim h44 px-3" onclick="punch('IN')">
+                  <i class="bi bi-box-arrow-in-right me-2"></i>ENTRADA
+                </button>
+                <button id="btnPunchOut" class="btn btn-gold btn-anim h44 px-3" onclick="punch('OUT')">
+                  <i class="bi bi-box-arrow-right me-2"></i>SAÍDA
+                </button>
+                <button class="icon-btn btn-anim" onclick="clearPunches()">
+                  <i class="bi bi-trash3 me-2"></i>LIMPAR
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="kpi-mini">
+                  <div class="lab">Status atual</div>
+                  <div class="num num-sm" id="punchStatus">—</div>
+                  <div class="sub" id="punchStatusHint">—</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="kpi-mini">
+                  <div class="lab">Hoje</div>
+                  <div class="num num-sm" id="punchToday">0h</div>
+                  <div class="sub">Total estimado do dia</div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Horário</th>
+                    <th>Obs.</th>
+                  </tr>
+                </thead>
+                <tbody id="punchesTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SALÁRIOS -->
+        <section class="view" id="view-salarios">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div>
+                <h6 class="fw-bold section-title mb-1">Histórico de salários</h6>
+                <p class="text-muted mb-0">Lance seus ganhos mensais.</p>
+              </div>
+
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim h44 px-3" data-bs-toggle="modal" data-bs-target="#salaryModal"
+                  onclick="openAddSalary()">
+                  <i class="bi bi-plus-lg me-2"></i>ADICIONAR
+                </button>
+                <button class="icon-btn btn-anim" onclick="exportSalariesCSV()">
+                  <i class="bi bi-download me-2"></i>EXPORTAR CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless align-middle mb-0 salary-table">
+                <thead>
+                  <tr>
+                    <th>Competência</th>
+                    <th>Valor</th>
+                    <th>Pago em</th>
+                    <th>Status</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="salariesTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- AGENDA PARTICULAR (LISTA) -->
+        <section class="view" id="view-agenda">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div>
+                <h6 class="fw-bold section-title mb-0">Minha agenda (particular)</h6>
+                <div class="text-muted small mt-1">Alunos/contratos e horários agendados.</div>
+              </div>
+
+              <div class="d-flex align-items-center gap-2 flex-wrap agenda-actions-mobile">
+                <button class="btn btn-gold btn-anim h44 px-3" data-bs-toggle="modal" data-bs-target="#studentModal"
+                  onclick="openAddStudent()">
+                  <i class="bi bi-person-plus me-2"></i>+ ALUNO
+                </button>
+
+                <div class="agenda-month-nav" style="display:grid;grid-template-columns:38px minmax(0,1fr) 38px;align-items:center;gap:.5rem;">
+                  <button class="btn btn-gold btn-anim btn-square" style="width:38px;height:38px;padding:0;" onclick="prevMonth()" aria-label="Mês anterior">
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+
+                  <span class="badge-pill">
+                    <span id="agendaMonthLabel">—</span>
+                  </span>
+
+                  <button class="btn btn-gold btn-anim btn-square" style="width:38px;height:38px;padding:0;" onclick="nextMonth()" aria-label="Próximo mês">
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </div>
+
+                <button class="icon-btn btn-anim" onclick="openEventModalForDate()">
+                  <i class="bi bi-plus-lg me-2"></i>NOVO HORÁRIO
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-lg-4">
+                <div class="kpi-mini">
+                  <div class="lab">Alunos ativos</div>
+                  <div class="num" id="studentsCount">0</div>
+                  <div class="sub">Contratos em andamento</div>
+                </div>
+
+                <div class="kpi-mini mt-3">
+                  <div class="lab">Filtrar</div>
+                  <input id="agendaFilter" class="form-control" placeholder="Buscar aluno (nome)">
+                  <div class="text-muted small mt-2">A lista e os eventos respeitam o filtro.</div>
+                </div>
+
+                <div class="kpi-mini mt-3">
+                  <div class="lab">Alunos (lista)</div>
+                  <div id="studentsList" class="mt-2"></div>
+                </div>
+              </div>
+
+              <div class="col-lg-8">
+                <div class="agenda-list-head">
+                  <div>
+                  <div class="agenda-title">Horários do mês</div>
+                    <div class="text-muted small">Agrupado por dia, ordenado por hora</div>
+                  </div>
+                </div>
+
+                <div id="agendaList"></div>
+
+                <div class="mt-3 text-muted small">
+                  Dica: clique em “Novo horário” para criar rápido.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CASHBACK DO PROFISSIONAL -->
+        <section class="view" id="view-cashback">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div>
+                <h6 class="fw-bold section-title mb-0">Meu cashback</h6>
+                <p class="text-muted mb-0">Saldo e extrato de cashback.</p>
+              </div>
+
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim h44 px-3" onclick="redeemProCashback()">
+                  <i class="bi bi-wallet2 me-2"></i>USAR CASHBACK
+                </button>
+                <button class="icon-btn btn-anim" onclick="exportCashbackCSV()">
+                  <i class="bi bi-download me-2"></i>EXPORTAR CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="kpi-mini">
+                  <div class="lab">Saldo</div>
+                  <div class="num">R$ <span id="proCbBalance">0,00</span></div>
+                  <div class="sub">Disponível agora</div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="kpi-mini">
+                  <div class="lab">Meta</div>
+                  <div class="num">R$ <span id="proCbGoal">0,00</span></div>
+                  <div class="sub">Objetivo do período</div>
+                  <div class="bar"><i id="proCbBar"></i></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="kpi-mini">
+                  <div class="lab">Progresso</div>
+                  <div class="num"><span id="proCbPct">0</span>%</div>
+                  <div class="sub">Atingimento</div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Origem</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+                <tbody id="proCbTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- MINHAS COMPRAS -->
+        <section class="view" id="view-compras">
+          <div class="card p-4 js-stagger">
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+              <span class="plan-pill" style="margin-top:0;">
+                <span>Total:</span>
+                <b id="ordersCount">0 pedidos</b>
+              </span>
+            </div>
+
+            <div class="orders-toolbar mb-3">
+              <div class="orders-filters">
+                <button class="orders-filter is-active" data-status="ALL">Todos</button>
+                <button class="orders-filter" data-status="AGUARDANDO">Aguardando</button>
+                <button class="orders-filter" data-status="ENTREGUE">Entregue</button>
+                <button class="orders-filter" data-status="CANCELADO">Cancelado</button>
+                <button class="orders-filter" data-status="DEVOLVIDO">Devolvido</button>
+              </div>
+
+              <div class="orders-search-wrap">
+                <input type="text" id="ordersSearch" class="form-control bg-black text-white form-premium orders-search"
+                  placeholder="Buscar produto ou pedido...">
+              </div>
+            </div>
+
+            <div id="ordersList" class="orders-list"></div>
+          </div>
+        </section>
+
+      </main>
+    
+  </div>
+
+  <!-- OFFCANVAS (mobile menu) -->
+  <div class="offcanvas offcanvas-start offcanvas-premium" tabindex="-1" id="mobileMenu"
+    aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header">
+      <div>
+        <div id="mobileMenuLabel" class="off-title">Menu</div>
+        <div class="small text-muted">Navegação rápida</div>
+      </div>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav-rail" id="navRailMobile"></div>
+      <div class="mt-3">
+        <button class="btn btn-soft btn-anim w-100 h46" onclick="logout()" data-ripple-bound="1">
+          <i class="bi bi-box-arrow-right me-2"></i>Sair
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SALÁRIO -->
+  <div class="modal fade" id="salaryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <h5 class="fw-bold mb-3" id="salaryModalTitle">Adicionar salário</h5>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label text-muted">Competência (ex.: 02/2026)</label>
+            <input id="inpSalCompet" class="form-control" placeholder="MM/AAAA">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Valor (R$)</label>
+            <input id="inpSalValue" type="number" step="0.01" class="form-control" placeholder="0.00">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Pago em</label>
+            <input id="inpSalPaidOn" class="form-control" placeholder="DD/MM/AAAA">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Status</label>
+            <select id="inpSalStatus" class="form-select">
+              <option value="PAGO">PAGO</option>
+              <option value="PENDENTE">PENDENTE</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="hidden" id="inpSalIndex" value="-1">
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveSalary()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ALUNO -->
+  <div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <h5 class="fw-bold mb-3" id="studentModalTitle">Adicionar aluno</h5>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label text-muted">Nome</label>
+            <input id="inpStName" class="form-control" placeholder="Nome do aluno">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Contato (WhatsApp)</label>
+            <input id="inpStPhone" class="form-control" placeholder="(00) 00000-0000">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Plano/Contrato</label>
+            <select id="inpStPlan" class="form-select">
+              <option value="Mensal">Mensal</option>
+              <option value="Trimestral">Trimestral</option>
+              <option value="Anual">Anual</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Status</label>
+            <select id="inpStStatus" class="form-select">
+              <option value="ATIVO">ATIVO</option>
+              <option value="PAUSADO">PAUSADO</option>
+              <option value="ENCERRADO">ENCERRADO</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Valor mensal (R$)</label>
+            <input id="inpStFee" type="number" step="0.01" class="form-control" placeholder="0.00">
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted">Observações</label>
+            <input id="inpStNote" class="form-control" placeholder="Ex.: 2x na semana, foco em hipertrofia">
+          </div>
+        </div>
+
+        <input type="hidden" id="inpStId" value="">
+
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveStudent()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EVENTO (AGENDA) -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <h5 class="fw-bold mb-3" id="eventModalTitle">Agendar horário</h5>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label text-muted">Aluno</label>
+            <select id="inpEvStudentId" class="form-select"></select>
+            <div class="text-muted small mt-1">Se não aparecer, adicione o aluno primeiro.</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Data</label>
+            <input id="inpEvDate" type="date" class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Hora</label>
+            <input id="inpEvTime" class="form-control" placeholder="HH:MM" inputmode="numeric" maxlength="5" autocomplete="off">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Tipo</label>
+            <select id="inpEvType" class="form-select">
+              <option value="PERSONAL">PERSONAL</option>
+              <option value="AVALIAÇÃO">AVALIAÇÃO</option>
+              <option value="AULA">AULA</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Local</label>
+            <input id="inpEvPlace" class="form-control" placeholder="Ex.: Sala 2 / Box">
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted">Observação</label>
+            <input id="inpEvNote" class="form-control" placeholder="Ex.: treino A, posterior, mobilidade...">
+          </div>
+        </div>
+
+        <input type="hidden" id="inpEvId" value="">
+
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <div class="d-flex gap-2">
+            <button class="icon-btn btn-anim btn-remove-event" onclick="deleteEvent()" aria-label="Remover">
+              <i class="bi bi-trash3 me-2"></i><span class="btn-remove-text">REMOVER</span>
+            </button>
+            <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" onclick="saveEvent()">
+              <i class="bi bi-check2 me-2"></i>SALVAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL NOTA FISCAL -->
+  <div class="modal fade" id="invoiceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Nota Fiscal (Fake)</h5>
+            <div class="text-muted small" id="invSubtitle">Pedido —</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div id="invBody" class="small"></div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Fechar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="alert('Baixando PDF...')">Baixar PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL RASTREIO -->
+  <div class="modal fade" id="trackingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Rastreio do pedido</h5>
+            <div class="text-muted small" id="trackingSubtitle">Simule as etapas de entrega.</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+        <div id="trackingBody"></div>
+
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-4 flex-wrap">
+          <button class="btn btn-outline-light" style="border-radius:12px;" type="button" onclick="trackingPrevStep()">
+            Voltar etapa
+          </button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" type="button"
+            onclick="trackingNextStep()">
+            Avançar etapa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL AVALIAÇÃO DE PRODUTO -->
+  <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Avaliar Produto</h5>
+            <div class="text-muted small" id="reviewProductName">Produto</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="mb-3">
+          <label class="form-label text-muted mb-2">Avaliação</label>
+          <div class="d-flex gap-2 align-items-center">
+            <span id="reviewStar1" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(1)">☆</span>
+            <span id="reviewStar2" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(2)">☆</span>
+            <span id="reviewStar3" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(3)">☆</span>
+            <span id="reviewStar4" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(4)">☆</span>
+            <span id="reviewStar5" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(5)">☆</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Comentário (opcional)</label>
+          <textarea id="reviewText" class="form-control bg-black text-white form-premium" rows="4"
+            placeholder="Deixe seu comentário sobre o produto..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="submitReview()">Enviar Avaliação</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SUPORTE -->
+  <div class="modal fade" id="supportModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Suporte</h5>
+            <div class="text-muted small">Pedido: <span id="supportOrderId">—</span></div>
+            <div class="text-muted small">Produto: <span id="supportOrderName">—</span></div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Assunto</label>
+          <input type="text" class="form-control bg-black text-white form-premium" placeholder="Ex.: Problema com entrega">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Mensagem</label>
+          <textarea class="form-control bg-black text-white form-premium" rows="5"
+            placeholder="Descreva seu problema ou dúvida..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="alert('Mensagem enviada! Entraremos em contato em breve.')">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/perfilProfissional.js"></script>
+</body>
+
+</html>

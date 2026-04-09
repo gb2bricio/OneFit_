@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>ONE FIT • Redefinir senha</title>
+
+    <link rel="stylesheet" href="./css/redefinirSenha.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <section class="login-card" data-aos="fade-up">
+
+        <img src="./img/logo_onefit.png" class="logo">
+
+        <!-- TELA EMAIL -->
+
+        <div class="screen active" id="screen-request">
+
+            <h1>Redefinir Senha</h1>
+
+            <div class="input-group">
+
+                <input type="email" id="email" placeholder="Digite seu e-mail" autocomplete="email">
+
+                <i class="fa-solid fa-envelope"></i>
+
+            </div>
+
+            <p class="erro" id="erroEmail"></p>
+
+            <button class="btn-login" id="btnEnviar" disabled>ENVIAR</button>
+
+            <p class="success" id="msgEnviado"></p>
+
+            <div class="remember-forgot">
+
+                <a href="login.html">Voltar</a>
+
+                <a href="#" id="irNovaSenha" style="display:none">Definir nova senha</a>
+
+            </div>
+
+        </div>
+
+
+        <!-- TELA NOVA SENHA -->
+
+        <div class="screen" id="screen-newpass">
+
+            <h1>Nova Senha</h1>
+
+            <div class="input-group">
+
+                <input type="password" id="senha" placeholder="Nova senha">
+
+                <span class="toggle-password" id="toggleSenha">
+                    <i class="fa-regular fa-eye"></i>
+                </span>
+
+                <i class="fa-solid fa-lock"></i>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <input type="password" id="confirmarSenha" placeholder="Confirmar senha">
+
+                <span class="toggle-password" id="toggleConfirmar">
+                    <i class="fa-regular fa-eye"></i>
+                </span>
+
+                <i class="fa-solid fa-lock"></i>
+
+            </div>
+
+            <p class="erro" id="erroSenha"></p>
+
+            <button class="btn-login" id="btnSalvar" disabled>SALVAR</button>
+
+            <p class="success" id="msgSucesso"></p>
+
+        </div>
+
+    </section>
+
+    <script src="./js/redefinirSenha.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ONE FIT | Matrícula</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- CSS separado -->
+  <link rel="stylesheet" href="./css/matricula.css">
+</head>
+
+<body>
+  <div class="container py-4" data-aos="fade-up">
+
+
+
+    <div class="text-center mb-4">
+      <img src="./img/logo_onefit.png" class="logo mb-3" alt="ONE FIT">
+      <h4 class="fw-bold">Finalize sua Matrícula</h4>
+      <p class="text-muted mb-0">Complete seus dados e escolha a forma de pagamento</p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- botao voltar para a home -->
+      <div class="btn-home-wrap m-0">
+        <a href="home.html" class="btn-home d-inline-flex align-items-center gap-2 w-auto">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+      </div>
+
+
+      <!-- FORM -->
+      <div class="col-lg-7 mt-0">
+        <div class="card p-4 h-100 d-flex flex-column js-stagger">
+          <form id="signupForm" novalidate>
+            <div class="row g-3">
+
+              <div class="col-12">
+                <label class="field-label" for="nome">Nome completo:<span class="required-star">*</span></label>
+                <input id="nome" name="nome" class="form-control" placeholder="Digite seu nome completo" required>
+                <div class="field-error" data-error-for="nome">Informe seu nome completo.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="nacionalidade">Nacionalidade:<span
+                    class="required-star">*</span></label>
+                <input id="nacionalidade" name="nacionalidade" class="form-control" placeholder="Ex.: Brasileira"
+                  required>
+                <div class="field-error" data-error-for="nacionalidade">Informe sua nacionalidade.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="nascimento">Data de nascimento:<span
+                    class="required-star">*</span></label>
+                <input id="nascimento" name="nascimento" type="date" class="form-control" required>
+                <div class="field-error" data-error-for="nascimento">Selecione sua data de nascimento.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="genero">Gênero:<span class="required-star">*</span></label>
+                <select id="genero" name="genero" class="form-select" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                </select>
+                <div class="field-error" data-error-for="genero">Selecione seu gênero.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="cpf">CPF:<span class="required-star">*</span></label>
+                <input id="cpf" name="cpf" class="form-control" placeholder="000.000.000-00" inputmode="numeric"
+                  autocomplete="off" maxlength="14" required>
+                <div class="field-error" data-error-for="cpf">Informe um CPF válido.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="endereco">Endereço/Bairro/n:<span class="required-star">*</span></label>
+                <input id="endereco" name="endereco" class="form-control" placeholder="Rua, bairro, nº" required>
+                <div class="field-error" data-error-for="endereco">Informe seu endereço completo.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="cidadeEstado">Cidade/Estado:<span class="required-star">*</span></label>
+                <input id="cidadeEstado" name="cidadeEstado" class="form-control" placeholder="Ex.: São Paulo/SP"
+                  required>
+                <div class="field-error" data-error-for="cidadeEstado">Informe cidade e estado.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="email">E-mail:<span class="required-star">*</span></label>
+                <input id="email" name="email" type="email" class="form-control" placeholder="seuemail@exemplo.com"
+                  required>
+                <div class="field-error" data-error-for="email">Informe um e-mail válido.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label" for="celular">Celular:<span class="required-star">*</span></label>
+                <input id="celular" name="celular" class="form-control" placeholder="(11) 91234-5678" inputmode="tel"
+                  autocomplete="off" maxlength="15" required>
+                <div class="field-error" data-error-for="celular">Informe um celular válido (com DDD).</div>
+              </div>
+
+              <div class="col-12 password-wrap">
+                <label class="field-label" for="senha">Senha:<span class="required-star">*</span></label>
+                <input id="senha" name="senha" type="password" class="form-control"
+                  placeholder="Crie uma senha (mín. 6 caracteres)" minlength="6" required>
+                <button class="toggle-pass" type="button" aria-label="Exibir senha" data-toggle-for="senha">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+                <div class="field-error" data-error-for="senha">Crie uma senha (mínimo 6 caracteres).</div>
+              </div>
+
+              <div class="col-12 password-wrap">
+                <label class="field-label" for="confirmarSenha">Confirmar senha:<span
+                    class="required-star">*</span></label>
+                <input id="confirmarSenha" name="confirmarSenha" type="password" class="form-control"
+                  placeholder="Repita a senha" minlength="6" required>
+                <button class="toggle-pass" type="button" aria-label="Exibir senha" data-toggle-for="confirmarSenha">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+                <div class="field-error" data-error-for="confirmarSenha">Confirme sua senha.</div>
+              </div>
+
+              <div class="col-12">
+                <div id="passwordMismatch" class="field-error" style="display:none;">
+                  As senhas precisam ser idênticas.
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA -->
+      <div class="col-lg-5 d-flex flex-column gap-4">
+
+        <!-- RESUMO -->
+        <div class="card p-4 d-flex flex-column js-stagger h-lg-100">
+          <div>
+            <h6 class="section-title" id="selectedPlanTitle">Plano ONE FIT</h6>
+            <p class="text-gold mb-1" id="selectedPlanSubtitle">Mensal • Acesso completo</p>
+
+            <hr>
+
+            <div class="d-flex justify-content-between summary mb-3">
+              <span>Total</span>
+              <span id="total">R$ 119,90</span>
+            </div>
+          </div>
+
+          <div class="pb-1 summary-footer">
+            <div class="btn-wrap">
+              <button id="finishBtn" class="btn btn-gold btn-anim btn-fixed px-4" type="button">
+                <span id="finishBtnText" href="login.html">PAGAR E FINALIZAR</span>
+              </button>
+            </div>
+
+            <div id="formFeedback" class="text-muted text-center mt-2" style="font-size:.9rem; display:none;">
+              Preencha todos os campos corretamente.
+            </div>
+          </div>
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="card p-4 d-flex flex-column js-stagger">
+          <h6 class="section-title mb-3">Forma de pagamento</h6>
+
+          <div class="d-grid gap-3">
+            <div class="payment-option active" data-pay="pix">
+              💠 Pix <span class="text-gold">• pagamento instantâneo</span>
+            </div>
+
+            <div class="payment-option" data-pay="card">
+              💳 Cartão de Crédito
+            </div>
+
+
+            <!-- PIX -->
+            <div id="pixFields" class="mt-4">
+              <div class="pix-box">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div>
+                    <div class="fw-bold">Pague com Pix</div>
+                    <div class="text-muted" style="font-size:.92rem;">
+                      Escaneie o QR Code ou copie o código abaixo.
+                    </div>
+                  </div>
+                  <span class="badge"
+                    style="background: rgba(245,180,0,.16); color: rgb(245,180,0); border:1px solid rgba(245,180,0,.28);">
+                    Válido por 10 min
+                  </span>
+                </div>
+
+                <div class="pix-qr mt-3" id="pixQr" aria-label="QR Code Pix"></div>
+
+                <div class="mt-3">
+                  <label class="text-muted mb-2" style="font-size:.9rem;">Pix Copia e Cola</label>
+                  <textarea id="pixCode" class="form-control pix-code" rows="3" readonly></textarea>
+
+                  <div class="btn-wrap">
+                    <button id="copyPixBtn" type="button" class="btn btn-gold btn-anim btn-fixed px-4">
+                      COPIAR CÓDIGO
+                    </button>
+                  </div>
+
+                  <div id="copyFeedback" class="text-muted text-center mt-2" style="font-size:.9rem; display:none;">
+                    Código copiado ✅
+                  </div>
+
+                  <!-- COMPROVANTE PIX (aparece após copiar) -->
+                  <div id="pixProofWrap" class="mt-3" style="display:none;">
+                    <label class="text-muted mb-2" style="font-size:.9rem;">Enviar comprovante do Pix</label>
+                    <input id="pixProof" type="file" accept="image/*,application/pdf" class="form-control" />
+                    <div class="text-muted mt-2" style="font-size:.85rem;">
+                      Anexe uma imagem ou PDF do comprovante para finalizar.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARTÃO -->
+            <div id="cardFields" class="mt-4 d-none">
+              <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                <div class="text-muted" style="font-size:.9rem;">Cartão de crédito (teste)</div>
+                <button id="fillFakeCardBtn" type="button" class="btn btn-outline-light btn-sm"
+                  style="border-radius:10px;font-weight:800;">
+                  Usar cartão teste
+                </button>
+              </div>
+
+              <input id="cardNumber" class="form-control mb-2" placeholder="Número do cartão" inputmode="numeric"
+                autocomplete="cc-number">
+              <div class="row g-2">
+                <div class="col-6"><input id="cardExp" class="form-control" placeholder="MM/AA" inputmode="numeric"
+                    autocomplete="cc-exp"></div>
+                <div class="col-6"><input id="cardCvv" class="form-control" placeholder="CVV" inputmode="numeric"
+                    autocomplete="cc-csc"></div>
+              </div>
+              <div id="cardFeedback" class="text-muted text-center mt-2" style="font-size:.9rem; display:none;">
+                Preencha os dados do cartão (ou use o cartão teste).
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS separado -->
+    <script src="./js/catalogoPublico.js"></script>
+    <script src="./js/matricula.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false
+        });
+    </script>
+</body>
+
+</html>

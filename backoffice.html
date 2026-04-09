@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ONE FIT | Backoffice Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Seu CSS -->
+  <link rel="stylesheet" href="./css/backoffice.css" />
+  <style>
+    .staff-table tr.staff-empty-row td {
+      white-space: normal;
+    }
+
+    .staff-table .product-image-thumb,
+    .staff-table .product-image-fallback {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .staff-table .product-image-fallback {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .staff-name-cell,
+    .staff-name-inline,
+    .staff-name-primary {
+      min-width: 0;
+    }
+
+    .staff-table td[data-label="Nome"] {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 6px;
+      min-width: 0;
+      align-items: center;
+    }
+
+    .staff-table td[data-label="Nome"] .staff-name-inline {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      width: auto;
+      max-width: none;
+      overflow: visible;
+    }
+
+    .staff-table td[data-label="Nome"] .staff-name-primary {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: inline-block;
+      overflow: visible;
+      text-overflow: clip;
+      white-space: nowrap;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: clamp(0.48rem, calc(0.96rem - (var(--staff-name-len, 12) * 0.022rem)), 0.7rem);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+
+    @media (min-width: 992px) {
+      #view-staff .staff-table-wrap {
+        overflow-x: auto;
+      }
+
+      #view-staff .staff-table {
+        min-width: 0;
+        width: 100%;
+        table-layout: fixed;
+      }
+
+      #view-staff .staff-table th,
+      #view-staff .staff-table td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.68rem;
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+
+      #view-staff .staff-table th:nth-child(1),
+      #view-staff .staff-table td:nth-child(1) { width: 6%; }
+      #view-staff .staff-table th:nth-child(2),
+      #view-staff .staff-table td:nth-child(2) { width: 8%; }
+      #view-staff .staff-table th:nth-child(3),
+      #view-staff .staff-table td:nth-child(3) { width: 16%; }
+      #view-staff .staff-table th:nth-child(4),
+      #view-staff .staff-table td:nth-child(4) { width: 22%; }
+      #view-staff .staff-table th:nth-child(5),
+      #view-staff .staff-table td:nth-child(5) { width: 21%; }
+      #view-staff .staff-table th:nth-child(6),
+      #view-staff .staff-table td:nth-child(6) { width: 9%; }
+      #view-staff .staff-table th:nth-child(7),
+      #view-staff .staff-table td:nth-child(7) { width: 18%; }
+
+      #view-staff .staff-table td:nth-child(3) {
+        white-space: nowrap;
+        overflow: visible !important;
+        text-overflow: clip;
+        padding-right: 1px;
+      }
+
+      #view-staff .staff-table td:nth-child(4),
+      #view-staff .staff-table th:nth-child(4) {
+        padding-left: 1px;
+      }
+
+      #view-staff .staff-table td:nth-child(4) .badge-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.56rem !important;
+        padding: 2px 6px !important;
+      }
+
+      #view-staff .staff-table .actions-cell {
+        flex-wrap: nowrap;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+
+    <!-- MOBILE TOPBAR -->
+    <div class="mobile-topbar">
+      <div class="glass d-flex align-items-center justify-content-between p-3">
+        <div class="d-flex align-items-center gap-3 min-w-0">
+          <img src="./img/logo_onefit.png" class="logo" alt="ONE FIT">
+          <div class="d-none d-sm-block">
+            <div style="font-weight:900;color:rgba(var(--gold-glow),.95);">Backoffice</div>
+            <div class="small text-muted">Admin • academia</div>
+          </div>
+        </div>
+        <button class="btn btn-gold btn-anim h44 px-3" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu">
+            <i class="bi bi-list me-1"></i> 
+          </button>
+      </div>
+    </div>
+
+    <!-- HEADER (desktop) -->
+    <div class="text-center mb-3 d-none d-lg-block">
+      <img src="./img/logo_onefit.png" class="logo mb-2" alt="ONE FIT">
+      <h4 class="fw-bold mb-1">Backoffice Admin</h4>
+      <p class="text-muted mb-0">Gestão de usuários, pagamentos, cashbacks, acessos, produtos e professores.
+      </p>
+    </div>
+
+    <div class="app-shell">
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar glass d-none d-lg-block">
+        <div class="brand-mini">
+          <div class="brand-left">
+            <div class="brand-dot"></div>
+            <h6>ONE FIT</h6>
+          </div>
+
+          <button class="logout-icon-btn btn-anim" type="button" onclick="logout()" title="Sair" aria-label="Sair">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="nav-rail" id="navRail">
+          <button class="nav-itemx" data-view="view-overview">
+            <div class="nav-ico">⌁</div>
+            <div class="nav-txt">
+              <div class="t">Visão geral</div>
+              <div class="s">KPIs do backoffice</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-users">
+            <div class="nav-ico">U</div>
+            <div class="nav-txt">
+              <div class="t">Usuários</div>
+              <div class="s">Cadastro e contratos</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-payments">
+            <div class="nav-ico">R$</div>
+            <div class="nav-txt">
+              <div class="t">Pagamentos</div>
+              <div class="s">Filtro + histórico</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-cashback">
+            <div class="nav-ico">CB</div>
+            <div class="nav-txt">
+              <div class="t">Cashbacks</div>
+              <div class="s">Crédito, débito e massa</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-access">
+            <div class="nav-ico">A</div>
+            <div class="nav-txt">
+              <div class="t">Acessos</div>
+              <div class="s">Liberar, bloquear, presença</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-products">
+            <div class="nav-ico nav-ico-products">
+              <i class="bi bi-box-seam-fill"></i>
+            </div>
+            <div class="nav-txt">
+              <div class="t">Produtos</div>
+              <div class="s">Marketplace e estoque</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-plans">
+            <div class="nav-ico">M</div>
+            <div class="nav-txt">
+              <div class="t">Mensalidades</div>
+              <div class="s">Planos exibidos na home</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-staff">
+            <div class="nav-ico">P</div>
+            <div class="nav-txt">
+              <div class="t">Professores</div>
+              <div class="s">Educadores, médicos, etc</div>
+            </div>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main-stage glass">
+
+        <!-- ========================= VISÃO GERAL ========================= -->
+        <section class="view is-active" id="view-overview">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Resumo operacional</h6>
+                <div class="text-muted">Acompanhe volume, inadimplência, cashback, acesso e produtos.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <span class="pill-mini">Hoje: <b id="todayLabel">—</b></span>
+              </div>
+            </div>
+
+            <div class="kpi-strip kpi-strip-3 mt-3">
+              <div class="kpi-mini">
+                <div class="lab">Usuários ativos</div>
+                <div class="num" id="kpiUsersActive">0</div>
+                <div class="sub">Base: status do usuário</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Pagamentos (30d)</div>
+                <div class="num">R$ <span id="kpiPayments30d">0,00</span></div>
+                <div class="sub">Somatório por data</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Cashback distribuído</div>
+                <div class="num">R$ <span id="kpiCbDistributed">0,00</span></div>
+                <div class="sub">Total histórico</div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="kpi-strip">
+              <div class="kpi-mini">
+                <div class="lab">Acessos liberados</div>
+                <div class="num" id="kpiAccessOn">0</div>
+                <div class="sub">Usuários com acesso</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Acessos bloqueados</div>
+                <div class="num" id="kpiAccessOff">0</div>
+                <div class="sub">Bloqueio manual ou contrato</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Presenças (30d)</div>
+                <div class="num" id="kpiPresence30d">0</div>
+                <div class="sub">Total de check-ins</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Profissionais</div>
+                <div class="num" id="kpiStaff">0</div>
+                <div class="sub">Cadastro ativo</div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="kpi-strip">
+              <div class="kpi-mini">
+                <div class="lab">Produtos cadastrados</div>
+                <div class="num" id="kpiProducts">0</div>
+                <div class="sub">Total no catálogo</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Disponíveis</div>
+                <div class="num" id="kpiProductsAvailable">0</div>
+                <div class="sub">Estoque maior que zero</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Indisponíveis</div>
+                <div class="num" id="kpiProductsUnavailable">0</div>
+                <div class="sub">Sem estoque</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Valor em estoque</div>
+                <div class="num">R$ <span id="kpiStockValue">0,00</span></div>
+                <div class="sub">Preço final x quantidade</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= USUÁRIOS ========================= -->
+        <section class="view" id="view-users">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Usuários</h6>
+                <div class="text-muted">ID, e-mail, CPF, status, matrícula e vigência de contrato.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openUserModal()">NOVO USUÁRIO</button>
+              </div>
+            </div>
+
+            <div class="row g-2 mt-2 users-filters-row">
+              <div class="col-12 col-lg-4">
+                <label class="form-label mb-1">Buscar</label>
+                <input id="usersSearch" class="form-control" placeholder="nome, email, cpf ou id"
+                  oninput="renderUsers()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Status</label>
+                <select id="usersStatusFilter" class="form-select" onchange="renderUsers()">
+                  <option value="ALL">Todos</option>
+                  <option value="ATIVO">Ativo</option>
+                  <option value="INATIVO">Inativo</option>
+                  <option value="SUSPENSO">Suspenso</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-5">
+                <label class="form-label mb-1">Ações rápidas</label>
+                <div class="d-flex gap-2 flex-wrap users-quick-actions">
+                  <button class="icon-btn btn-anim" onclick="goView('view-payments')">VER PAGAMENTOS</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3 users-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 users-table">
+                <thead>
+                  <tr>
+                    <th>ID Usuário</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Status</th>
+                    <th>Matrícula</th>
+                    <th>Contrato até</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= PAGAMENTOS ========================= -->
+        <section class="view" id="view-payments">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Pagamentos</h6>
+                <div class="text-muted">Filtros por tipo (pix, crédito, débito, boleto) + histórico.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openPaymentModal()">REGISTRAR PAGAMENTO</button>
+              </div>
+            </div>
+
+            <div class="row g-2 mt-2 payments-filters-row">
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Tipo</label>
+                <select id="payTypeFilter" class="form-select" onchange="renderPayments()">
+                  <option value="ALL">Todos</option>
+                  <option value="PIX">PIX</option>
+                  <option value="CREDITO">Crédito</option>
+                  <option value="DEBITO">Débito</option>
+                  <option value="BOLETO">Boleto</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Usuário (ID)</label>
+                <input id="payUserIdFilter" class="form-control" placeholder="ex: 1001" oninput="renderPayments()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">De</label>
+                <input id="payDateFrom" type="date" class="form-control" onchange="renderPayments()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Até</label>
+                <input id="payDateTo" type="date" class="form-control" onchange="renderPayments()">
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap mt-3">
+              <span class="pill-mini">Total filtrado: <b>R$ <span id="payTotalFiltered">0,00</span></b></span>
+              <span class="pill-mini">Qtd: <b><span id="payCountFiltered">0</span></b></span>
+            </div>
+
+            <div class="table-responsive mt-3 payments-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 payments-table">
+                <thead>
+                  <tr>
+                    <th>ID Pagamento</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>ID Usuário</th>
+                    <th>Observação</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="paymentsAdminTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= CASHBACKS ========================= -->
+        <section class="view" id="view-cashback">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Cashbacks</h6>
+                <div class="text-muted">Creditar, debitar, distribuição em massa e controle.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openCbModal()">LANÇAR MOVIMENTO</button>
+                <button class="icon-btn btn-anim" onclick="openCbMassModal()">DISTRIBUIÇÃO EM MASSA</button>
+              </div>
+            </div>
+
+            <div class="kpi-strip kpi-strip-3 mt-3">
+              <div class="kpi-mini">
+                <div class="lab">Total distribuído</div>
+                <div class="num">R$ <span id="kpiCbTotal">0,00</span></div>
+                <div class="sub">Somatório de créditos</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Total debitado</div>
+                <div class="num">R$ <span id="kpiCbDebited">0,00</span></div>
+                <div class="sub">Somatório de débitos</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Saldo agregado</div>
+                <div class="num">R$ <span id="kpiCbBalanceAgg">0,00</span></div>
+                <div class="sub">Soma de saldos dos usuários</div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="row g-2 cashback-filters-row">
+              <div class="col-12 col-lg-4">
+                <label class="form-label mb-1">Filtrar por usuário (ID)</label>
+                <input id="cbUserIdFilter" class="form-control" placeholder="ex: 1001" oninput="renderCashback()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <label class="form-label mb-1">Tipo</label>
+                <select id="cbTypeFilter" class="form-select" onchange="renderCashback()">
+                  <option value="ALL">Todos</option>
+                  <option value="CREDITO">Crédito</option>
+                  <option value="DEBITO">Débito</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3 cashback-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 cashback-table">
+                <thead>
+                  <tr>
+                    <th>ID Mov.</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>ID Usuário</th>
+                    <th>Motivo</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="cbTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= ACESSOS ========================= -->
+        <section class="view" id="view-access">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Acessos</h6>
+                <div class="text-muted">Liberação/bloqueio e contagem de presença por usuário.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openPresenceModal()">REGISTRAR PRESENÇA</button>
+              </div>
+            </div>
+
+            <div class="row g-2 mt-2 access-filters-row">
+              <div class="col-12 col-lg-4">
+                <label class="form-label mb-1">Buscar</label>
+                <input id="accessSearch" class="form-control" placeholder="nome, email ou id" oninput="renderAccess()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <label class="form-label mb-1">Filtro de acesso</label>
+                <select id="accessFilter" class="form-select" onchange="renderAccess()">
+                  <option value="ALL">Todos</option>
+                  <option value="LIBERADO">Liberado</option>
+                  <option value="BLOQUEADO">Bloqueado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3 access-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 access-table">
+                <thead>
+                  <tr>
+                    <th>ID Usuário</th>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Acesso</th>
+                    <th>Presenças (30d)</th>
+                    <th>Contrato até</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="accessTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= PRODUTOS ========================= -->
+        <section class="view" id="view-products">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Produtos</h6>
+                <div class="text-muted">Cadastro de produtos do marketplace, foto, preço, desconto, cashback e estoque.
+                </div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openProductModal()">NOVO PRODUTO</button>
+              </div>
+            </div>
+
+            <div class="kpi-strip mt-3">
+              <div class="kpi-mini">
+                <div class="lab">Produtos cadastrados</div>
+                <div class="num" id="kpiProducts2">0</div>
+                <div class="sub">Catálogo administrativo</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Disponíveis</div>
+                <div class="num" id="kpiProductsAvailable2">0</div>
+                <div class="sub">Marketplace ativo</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Indisponíveis</div>
+                <div class="num" id="kpiProductsUnavailable2">0</div>
+                <div class="sub">Sem estoque ou pausados</div>
+              </div>
+              <div class="kpi-mini">
+                <div class="lab">Itens em estoque</div>
+                <div class="num" id="kpiProductUnits2">0</div>
+                <div class="sub">Quantidade total</div>
+              </div>
+            </div>
+
+            <hr class="hr-soft">
+
+            <div class="row g-2 products-filters-row">
+              <div class="col-12 col-lg-4">
+                <label class="form-label mb-1">Buscar</label>
+                <input id="productsSearch" class="form-control" placeholder="nome do produto"
+                  oninput="renderProducts()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Status</label>
+                <select id="productsStatusFilter" class="form-select" onchange="renderProducts()">
+                  <option value="ALL">Todos</option>
+                  <option value="DISPONIVEL">Disponível</option>
+                  <option value="INDISPONIVEL">Indisponível</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3 products-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 products-table">
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Desconto</th>
+                    <th>Preço final</th>
+                    <th>Cashback</th>
+                    <th>Estoque</th>
+                    <th>Status</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= PLANOS / MENSALIDADES ========================= -->
+        <section class="view" id="view-plans">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Planos & Mensalidades</h6>
+                <div class="text-muted">Cadastro dos planos que aparecem na home e na matrícula.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openPlanModal()">NOVO PLANO</button>
+              </div>
+            </div>
+
+            <div class="row g-2 mt-2 plans-filters-row">
+              <div class="col-12 col-lg-6">
+                <label class="form-label mb-1">Buscar</label>
+                <input id="plansSearch" class="form-control" placeholder="nome, chave ou benefício" oninput="renderPlans()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Status</label>
+                <select id="plansStatusFilter" class="form-select" onchange="renderPlans()">
+                  <option value="ALL">Todos</option>
+                  <option value="ATIVO">Ativo</option>
+                  <option value="INATIVO">Inativo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3 plans-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 plans-table">
+                <thead>
+                  <tr>
+                    <th>Chave</th>
+                    <th>Plano</th>
+                    <th>Preço</th>
+                    <th>Ciclo</th>
+                    <th>Benefícios</th>
+                    <th>Status</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="plansTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================= PROFESSORES / PROFISSIONAIS ========================= -->
+        <section class="view" id="view-staff">
+          <div class="card card-pad js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <div class="min-w-0">
+                <h6 class="fw-bold section-title mb-1">Professores & Profissionais</h6>
+                <div class="text-muted">Cadastro de educadores físicos, médicos, fisioterapeutas, etc.</div>
+              </div>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-gold btn-anim btn-cta" onclick="openStaffModal()">NOVO PROFISSIONAL</button>
+              </div>
+            </div>
+
+            <div class="row g-2 mt-2 staff-filters-row">
+              <div class="col-12 col-lg-5">
+                <label class="form-label mb-1">Buscar</label>
+                <input id="staffSearch" class="form-control" placeholder="nome, função, documento"
+                  oninput="renderStaff()">
+              </div>
+              <div class="col-12 col-sm-6 col-lg-3">
+                <label class="form-label mb-1">Função</label>
+                <select id="staffRoleFilter" class="form-select" onchange="renderStaff()">
+                  <option value="ALL">Todas</option>
+                  <option value="ED_FISICO">Educador físico</option>
+                  <option value="MEDICO">Médico</option>
+                  <option value="FISIO">Fisioterapeuta</option>
+                  <option value="NUTRI">Nutricionista</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <label class="form-label mb-1">Status</label>
+                <select id="staffStatusFilter" class="form-select" onchange="renderStaff()">
+                  <option value="ALL">Todos</option>
+                  <option value="ATIVO">Ativo</option>
+                  <option value="INATIVO">Inativo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3 staff-table-wrap">
+              <table class="table table-dark table-borderless align-middle mb-0 staff-table">
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Função</th>
+                    <th>Documento</th>
+                    <th>Status</th>
+                    <th class="text-end">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="staffTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- OFFCANVAS (mobile menu) -->
+  <div class="offcanvas offcanvas-start offcanvas-premium" tabindex="-1" id="mobileMenu"
+    aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header">
+      <div>
+        <div id="mobileMenuLabel" style="font-weight:900;color:rgba(var(--gold-glow),.95);">Menu</div>
+        <div class="small text-muted">Navegação rápida</div>
+      </div>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav-rail" id="navRailMobile"></div>
+      <div class="mt-3">
+        <button class="btn btn-soft btn-anim w-100 h46" onclick="logout()" data-ripple-bound="1">
+          <i class="bi bi-box-arrow-right me-2"></i>Sair
+        </button>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- ========================= MODAIS ========================= -->
+
+  <!-- MODAL USUÁRIO -->
+  <div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2" id="userModalTitle">Novo Usuário</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Campos essenciais para backoffice (ID, email, CPF, status e contrato).</div>
+
+        <div class="row g-3">
+          <input type="hidden" id="inpUserId">
+
+          <div class="col-md-4">
+            <label class="form-label">Nome</label>
+            <input id="inpUserName" class="form-control" placeholder="Ex.: Rodrigo Mielli">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">E-mail</label>
+            <input id="inpUserEmail" type="email" class="form-control" placeholder="nome@email.com">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">CPF</label>
+            <input id="inpUserCpf" class="form-control" placeholder="000.000.000-00">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Status</label>
+            <select id="inpUserStatus" class="form-select">
+              <option value="ATIVO">Ativo</option>
+              <option value="INATIVO">Inativo</option>
+              <option value="SUSPENSO">Suspenso</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Data abertura matrícula</label>
+            <input id="inpUserEnrollAt" type="date" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Data final contrato</label>
+            <input id="inpUserContractEnd" type="date" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Acesso</label>
+            <select id="inpUserAccess" class="form-select">
+              <option value="LIBERADO">Liberado</option>
+              <option value="BLOQUEADO">Bloqueado</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Saldo cashback</label>
+            <input id="inpUserCb" type="number" step="0.01" class="form-control" placeholder="0.00">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Observação</label>
+            <input id="inpUserNote" class="form-control" placeholder="Opcional">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveUser()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PAGAMENTO -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2" id="paymentModalTitle">Registrar Pagamento</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Histórico por usuário: data, valor e tipo.</div>
+
+        <div class="row g-3">
+          <input type="hidden" id="inpPayId">
+
+          <div class="col-md-3">
+            <label class="form-label">Data</label>
+            <input id="inpPayDate" type="date" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Tipo</label>
+            <select id="inpPayType" class="form-select">
+              <option value="PIX">PIX</option>
+              <option value="CREDITO">Crédito</option>
+              <option value="DEBITO">Débito</option>
+              <option value="BOLETO">Boleto</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Valor (R$)</label>
+            <input id="inpPayAmount" type="number" step="0.01" class="form-control" placeholder="119.90">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">ID Usuário</label>
+            <input id="inpPayUserId" class="form-control" placeholder="1001">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Observação</label>
+            <input id="inpPayNote" class="form-control" placeholder="Opcional (ex.: mensalidade março)">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="savePayment()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CASHBACK -->
+  <div class="modal fade" id="cbModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2" id="cbModalTitle">Lançar Movimento de Cashback</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Creditar ou debitar cashback de um usuário.</div>
+
+        <div class="row g-3">
+          <input type="hidden" id="inpCbId">
+
+          <div class="col-md-3">
+            <label class="form-label">Data</label>
+            <input id="inpCbDate" type="date" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Tipo</label>
+            <select id="inpCbType" class="form-select">
+              <option value="CREDITO">Crédito</option>
+              <option value="DEBITO">Débito</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Valor (R$)</label>
+            <input id="inpCbAmount" type="number" step="0.01" class="form-control" placeholder="10.00">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">ID Usuário</label>
+            <input id="inpCbUserId" class="form-control" placeholder="1001">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Motivo</label>
+            <input id="inpCbReason" class="form-control" placeholder="Ex.: campanha, ajuste, bônus de pontualidade">
+          </div>
+
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveCb()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CASHBACK MASSA -->
+  <div class="modal fade" id="cbMassModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2">Distribuição em Massa</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Exemplo: creditar todos os usuários ativos (ou por filtro).</div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Data</label>
+            <input id="inpCbMassDate" type="date" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Valor por usuário (R$)</label>
+            <input id="inpCbMassAmount" type="number" step="0.01" class="form-control" placeholder="5.00">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Alvo</label>
+            <select id="inpCbMassTarget" class="form-select">
+              <option value="ATIVOS">Usuários ativos</option>
+              <option value="TODOS">Todos</option>
+              <option value="ACESSO_LIBERADO">Acesso liberado</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Motivo</label>
+            <input id="inpCbMassReason" class="form-control" placeholder="Ex.: campanha de indicação, bônus mensal">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="applyCbMass()">Aplicar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PRESENÇA -->
+  <div class="modal fade" id="presenceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2">Registrar Presença</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Presenças por usuário (check-in).</div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Data</label>
+            <input id="inpPresenceDate" type="date" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">ID Usuário</label>
+            <input id="inpPresenceUserId" class="form-control" placeholder="1001">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Observação</label>
+            <input id="inpPresenceNote" class="form-control" placeholder="Opcional">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="savePresence()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PRODUTO -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2" id="productModalTitle">Novo Produto</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Cadastro completo do produto que será exibido no marketplace.</div>
+
+        <div class="row g-3">
+          <input type="hidden" id="inpProductId">
+          <input type="hidden" id="inpProductImageBase64">
+
+          <div class="col-md-4">
+            <label class="form-label">Nome do produto</label>
+            <input id="inpProductName" class="form-control" placeholder="Ex.: Whey Protein 900g">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Categoria</label>
+            <select id="inpProductCategory" class="form-select">
+              <option value="SUPLEMENTOS">Suplementos</option>
+              <option value="VESTUARIOS">Vestuários</option>
+              <option value="UTILIDADES">Utilidades</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Preço (R$)</label>
+            <input id="inpProductPrice" type="number" step="0.01" class="form-control" placeholder="199.90"
+              oninput="updateProductPricePreview()">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Desconto (%)</label>
+            <input id="inpProductDiscount" type="number" step="0.01" class="form-control" placeholder="10"
+              oninput="updateProductPricePreview()">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Cashback (R$)</label>
+            <input id="inpProductCashback" type="number" step="0.01" class="form-control" placeholder="15.00">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Estoque</label>
+            <input id="inpProductStock" type="number" step="1" min="0" class="form-control" placeholder="30">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Imagem do produto</label>
+            <input id="inpProductImageFile" type="file" class="form-control" accept="image/*"
+              onchange="handleProductImageUpload(event)">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">OU URL da imagem</label>
+            <input id="inpProductImageUrl" class="form-control" placeholder="https://site.com/imagem.jpg"
+              oninput="handleProductImageUrlInput()">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Preço final</label>
+            <div class="product-price-preview">
+              <span>R$ <b id="productFinalPricePreview">0,00</b></span>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <label class="form-label">Descrição</label>
+            <textarea id="inpProductDescription" class="form-control textarea-premium"
+              placeholder="Descreva o produto, benefícios, tamanho, sabor, cor, etc."></textarea>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Preview da foto</label>
+            <div class="product-image-preview-wrap">
+              <img id="productPreviewImage" class="product-preview-image" alt="Preview do produto">
+              <div id="productPreviewEmpty" class="product-preview-empty">Sem imagem</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveProduct()">Salvar Produto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL STAFF -->
+  <div class="modal fade" id="staffModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2" id="staffModalTitle">Novo Profissional</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Cadastro de profissionais: função, documento (CREF/CRM etc), contato e
+          status.</div>
+
+        <div class="row g-3">
+          <input type="hidden" id="inpStaffId">
+          <input type="hidden" id="inpStaffImageBase64">
+
+          <div class="col-md-4">
+            <label class="form-label">Nome</label>
+            <input id="inpStaffName" class="form-control" placeholder="Ex.: Ana Souza">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Função</label>
+            <select id="inpStaffRole" class="form-select">
+              <option value="ED_FISICO">Educador físico</option>
+              <option value="MEDICO">Médico</option>
+              <option value="FISIO">Fisioterapeuta</option>
+              <option value="NUTRI">Nutricionista</option>
+              <option value="OUTRO">Outro</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Título exibido no card</label>
+            <input id="inpStaffDisplayRole" class="form-control" placeholder="Ex.: Instrutora de Musculação">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Documento</label>
+            <input id="inpStaffDoc" class="form-control" placeholder="CREF/CRM/CRN/...">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Status</label>
+            <select id="inpStaffStatus" class="form-select">
+              <option value="ATIVO">Ativo</option>
+              <option value="INATIVO">Inativo</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">E-mail</label>
+            <input id="inpStaffEmail" type="email" class="form-control" placeholder="prof@onefit.com">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Telefone</label>
+            <input id="inpStaffPhone" class="form-control" placeholder="(00) 00000-0000">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">WhatsApp</label>
+            <input id="inpStaffWhatsapp" class="form-control" placeholder="5511999999999 ou https://wa.me/...">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Especialidade / descrição</label>
+            <input id="inpStaffSpecialty" class="form-control" placeholder="Ex.: Especialista em hipertrofia e emagrecimento">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Experiência</label>
+            <input id="inpStaffExperience" class="form-control" placeholder="Ex.: 8 anos de experiência">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Foto do profissional</label>
+            <input id="inpStaffImageFile" type="file" class="form-control" accept="image/*"
+              onchange="handleStaffImageUpload(event)">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">OU URL da foto</label>
+            <input id="inpStaffImageUrl" class="form-control" placeholder="https://site.com/foto.jpg"
+              oninput="handleStaffImageUrlInput()">
+          </div>
+
+          <div class="col-md-8">
+            <label class="form-label">Observação interna</label>
+            <input id="inpStaffNote" class="form-control" placeholder="Ex.: atende seg/qua, especialista em joelho">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Preview da foto</label>
+            <div class="product-image-preview-wrap">
+              <img id="staffPreviewImage" class="product-preview-image" alt="Preview do profissional">
+              <div id="staffPreviewEmpty" class="product-preview-empty">Sem foto</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveStaff()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PLANO -->
+  <div class="modal fade" id="planModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark text-white p-3 rounded-4" style="border:1px solid rgba(255,255,255,.10);">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <h5 class="fw-bold mb-2" id="planModalTitle">Novo Plano</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="text-muted small mb-3">Cadastro dos planos exibidos na home e utilizados na matrícula.</div>
+
+        <div class="row g-3">
+          <input type="hidden" id="inpPlanId">
+
+          <div class="col-md-5">
+            <label class="form-label">Nome do plano</label>
+            <input id="inpPlanName" class="form-control" placeholder="Ex.: Gold">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Preço mensal (R$)</label>
+            <input id="inpPlanPrice" type="number" step="0.01" class="form-control" placeholder="129.00">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Ciclo (meses)</label>
+            <input id="inpPlanCycleMonths" type="number" min="1" step="1" class="form-control" placeholder="1">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">Status</label>
+            <select id="inpPlanStatus" class="form-select">
+              <option value="ATIVO">Ativo</option>
+              <option value="INATIVO">Inativo</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Benefícios</label>
+            <textarea id="inpPlanBenefits" class="form-control textarea-premium"
+              placeholder="Um benefício por linha"></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Texto do botão</label>
+            <input id="inpPlanCtaText" class="form-control" placeholder="Matricule-se">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="savePlan()">Salvar Plano</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Seu JS -->
+  <script src="./js/catalogoPublico.js"></script>
+  <script src="./js/backoffice.js"></script>
+</body>
+
+</html>

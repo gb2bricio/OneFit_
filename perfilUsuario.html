@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ONE FIT | Área do Aluno</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/perfilUsuario.css" />
+</head>
+
+<body>
+
+  <div class="container py-3">
+
+    <!-- MOBILE TOPBAR -->
+    <div class="mobile-topbar">
+      <div class="d-flex align-items-center justify-content-between p-3">
+        <div class="d-flex align-items-center gap-3">
+          <img src="./img/logo_onefit.png" class="logo" alt="ONE FIT">
+          <div class="d-none d-sm-block">
+            <div class="mobile-topbar-title">Área do Aluno</div>
+          </div>
+        </div>
+
+        <button class="btn btn-gold btn-anim h44 px-3" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"
+          aria-controls="mobileMenu" aria-label="Abrir menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- HEADER (desktop) -->
+    <div class="text-center mb-3 d-none d-lg-block">
+      <img src="./img/logo_onefit.png" class="logo mb-2" alt="ONE FIT">
+      <h4 class="fw-bold mb-1">Área do Aluno</h4>
+      <p class="text-muted mb-0">Mantenha foco e disciplina que a conquista será sua!</p>
+    </div>
+
+    <div class="app-shell">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar glass d-none d-lg-block">
+        <div class="brand-mini">
+          <div class="brand-dot"></div>
+          <div class="min-w-0">
+            <h6>ONE FIT</h6>
+          </div>
+          <button class="btn btn-soft btn-anim h40 px-3 ms-auto" onclick="logout()" title="Sair" aria-label="Sair">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="nav-rail" id="navRail">
+          <button class="nav-itemx" data-view="view-perfil">
+            <div class="nav-ico">P</div>
+            <div class="nav-txt">
+              <div class="t">Perfil</div>
+              <div class="s">Informações do usuário</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-plano">
+            <div class="nav-ico">★</div>
+            <div class="nav-txt">
+              <div class="t">Plano</div>
+              <div class="s">Atual e troca</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-historico">
+            <div class="nav-ico">R$</div>
+            <div class="nav-txt">
+              <div class="t">Histórico</div>
+              <div class="s">Pagamentos e status</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-cashbacks">
+            <div class="nav-ico">CB</div>
+            <div class="nav-txt">
+              <div class="t">Cashbacks</div>
+              <div class="s">Saldo e extrato</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-compras">
+            <div class="nav-ico"><i class="bi bi-bag"></i></div>
+            <div class="nav-txt">
+              <div class="t">Minhas Compras</div>
+              <div class="s">Pedidos e entregas</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-treinos">
+            <div class="nav-ico">T</div>
+            <div class="nav-txt">
+              <div class="t">Treinos</div>
+              <div class="s">Editar ficha</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-agenda">
+            <div class="nav-ico">A</div>
+            <div class="nav-txt">
+              <div class="t">Minha agenda</div>
+              <div class="s">Calendário mensal</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-aulas">
+            <div class="nav-ico">+</div>
+            <div class="nav-txt">
+              <div class="t">Aulas</div>
+              <div class="s">Agende aulas coletivas</div>
+            </div>
+          </button>
+
+          <button class="nav-itemx" data-view="view-avaliacao">
+            <div class="nav-ico">AF</div>
+            <div class="nav-txt">
+              <div class="t">Avaliação</div>
+              <div class="s">Agende avaliação física</div>
+            </div>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main-stage glass">
+
+        <!-- VIEWS -->
+        <section class="view is-active" id="view-perfil">
+
+          <!-- PERFIL -->
+          <div class="card p-4 js-stagger">
+            <div class="profile-top">
+              <div class="profile-left">
+                <div class="avatar-wrap">
+                  <img id="profileAvatar" class="avatar" src="./img/avatar-default.png" alt="Foto do usuário">
+                  <div id="avatarPlaceholder" class="avatar-placeholder">Foto do<br>usuário</div>
+                </div>
+
+                <div class="profile-meta">
+                  <div class="profile-name" id="profileName">Rodrigo</div>
+                  <div class="profile-email text-muted" id="profileEmail">rodrigo@email.com</div>
+
+                  <div class="plan-pill">
+                    <span>Plano:</span>
+                    <b id="profilePlanLabel">Plano Gold</b>
+                  </div>
+                </div>
+              </div>
+              <div class="m-lg-3">
+                <button class="icon-btn btn-anim icon-mini" type="button" data-bs-toggle="modal"
+                  data-bs-target="#profileModal">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="profile-layout">
+
+              <!-- DADOS -->
+              <div>
+                <div class="profile-grid">
+                  <div>
+                    <div class="field-label">Telefone</div>
+                    <div class="field-value" id="profilePhone">—</div>
+                  </div>
+                  <div>
+                    <div class="field-label">Objetivo</div>
+                    <div class="field-value" id="profileGoal">—</div>
+                  </div>
+                  <div>
+                    <div class="field-label">Altura</div>
+                    <div class="field-value" id="profileHeight">—</div>
+                  </div>
+                  <div>
+                    <div class="field-label">Peso</div>
+                    <div class="field-value" id="profileWeight">—</div>
+                  </div>
+                </div>
+
+                <div class="profile-hint">
+                  Dica: mantenha seus dados atualizados para melhorar recomendações e avaliações.
+                </div>
+              </div>
+
+              <!-- MÉTRICAS -->
+              <div class="profile-metrics">
+                <div class="metric-box">
+                  <div class="metric-label">IMC</div>
+                  <div class="metric-value" id="imcValue">--</div>
+                  <div class="small text-muted mt-1" id="imcHint">Informe altura e peso para calcular.</div>
+                </div>
+
+                <div class="metric-box">
+                  <div class="metric-label">Status</div>
+                  <div class="badge-active" id="activeBadge">Aluno Ativo</div>
+                  <div class="small text-muted mt-2">Acesso liberado e mensalidade em dia.</div>
+                </div>
+
+                <div class="metric-box">
+                  <div class="metric-label">Progresso mensal</div>
+                  <div class="progress-mini">
+                    <div class="progress-mini-bar" id="profileProgressBar"></div>
+                  </div>
+                  <div class="small text-muted mt-2">
+                    <span id="profileProgressText">0%</span> da meta
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- RESUMO DO DASHBOARD -->
+          <div class="dashboard-mini" aria-label="Resumo do dashboard">
+            <div class="kpi-mini">
+              <div class="lab">Treinos no mês</div>
+              <div class="num"><span id="miniWorkouts">0</span></div>
+              <div class="sub">Meta: <span id="miniWorkoutsGoal">0</span></div>
+              <div class="bar"><i id="miniBarWorkouts"></i></div>
+            </div>
+
+            <div class="kpi-mini">
+              <div class="lab">Presença</div>
+              <div class="num"><span id="miniAttendance">0</span>%</div>
+              <div class="sub">Base: aulas agendadas</div>
+              <div class="bar"><i id="miniBarAttendance"></i></div>
+            </div>
+
+            <div class="kpi-mini">
+              <div class="lab">Meu Cashback</div>
+              <div class="num">R$ <span id="miniSavings">0,00</span></div>
+              <div class="sub">Total acumulado</div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="view" id="view-compras">
+
+          <div class="card p-4 js-stagger">
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+
+
+
+              <span class="plan-pill" style="margin-top:0;">
+                <span>Total:</span>
+                <b id="ordersCount">0 pedidos</b>
+              </span>
+
+            </div>
+
+
+            <!-- filtros -->
+            <div class="orders-toolbar mb-3">
+
+              <div class="orders-filters">
+                <button class="orders-filter is-active" data-status="ALL">Todos</button>
+                <button class="orders-filter" data-status="AGUARDANDO">Aguardando</button>
+                <button class="orders-filter" data-status="ENTREGUE">Entregue</button>
+                <button class="orders-filter" data-status="CANCELADO">Cancelado</button>
+                <button class="orders-filter" data-status="DEVOLVIDO">Devolvido</button>
+              </div>
+
+              <div class="orders-search-wrap">
+                <input type="text" id="ordersSearch" class="form-control bg-black text-white form-premium orders-search"
+                  placeholder="Buscar produto ou pedido...">
+              </div>
+
+            </div>
+
+
+            <!-- LISTA -->
+            <div id="ordersList" class="orders-list"></div>
+
+          </div>
+
+        </section>
+
+        </section>
+
+        <section class="view" id="view-plano">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-start justify-content-between gap-2">
+              <div>
+                <p class="mb-2 text-muted">Plano atual: <strong id="currentPlanLabelStatus">Plano Gold</strong></p>
+                <p class="mb-0 text-muted">Vencimento: <strong id="dueDateLabel">10/03/2026</strong></p>
+              </div>
+
+              <button class="btn btn-gold btn-anim btn-edit" data-bs-toggle="modal" data-bs-target="#planModal">
+                TROCAR PLANO
+              </button>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,.10); margin: 18px 0;">
+
+            <div class="text-muted">
+              Dica: Troque o plano, o vencimento será atualizado automaticamente e melhore seus ganhos de cashback.
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-historico">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <button id="payBtn" type="button" class="btn btn-gold btn-anim btn-edit" onclick="payNow()">
+                <span id="payBtnText">PAGAR AGORA</span>
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Mês</th>
+                    <th>Plano</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Cashback</th>
+                  </tr>
+                </thead>
+                <tbody id="paymentsTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-cashbacks">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <span class="plan-pill" style="margin-top:0;">
+                <span>Saldo:</span> <b>R$ <span id="cashbackPill">0,00</span></b>
+              </span>
+            </div>
+
+            <p class="text-muted mb-3">
+              Regras: pagamento <strong>antecipado</strong> gera cashback maior, <strong>no vencimento</strong> gera
+              cashback padrão e
+              <strong>atrasado</strong> gera <strong>R$ 0,00</strong>.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button class="btn btn-gold btn-anim btn-edit" onclick="useCashback()">
+                USAR CASHBACK
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Mês</th>
+                    <th>Status</th>
+                    <th>Pagamento</th>
+                    <th>Cashback</th>
+                  </tr>
+                </thead>
+                <tbody id="cashbackTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ✅ TREINOS EDITÁVEIS -->
+        <section class="view" id="view-treinos">
+          <div class="card p-4 js-stagger">
+            <div class="workout-tools">
+
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="icon-btn btn-anim icon-mini" onclick="openAddWorkout()">ADICIONAR TREINO</button>
+                <button class="icon-btn btn-anim icon-mini" onclick="openRemoveWorkout()">REMOVER TREINO</button>
+                <button class="icon-btn btn-anim icon-mini" onclick="clearWorkouts()">LIMPAR TREINOS</button>
+              </div>
+            </div>
+
+            <div class="accordion accordion-flush" id="workoutAccDynamic"
+              style="--bs-accordion-bg: transparent; --bs-accordion-border-color: rgba(255,255,255,.10);"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-agenda">
+          <div class="card p-4 js-stagger">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+
+
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-gold btn-anim btn-cal-nav" onclick="prevMonth()"
+                  aria-label="Mês anterior">◀</button>
+
+                <span class="badge-pill badge-month">
+                  <span id="agendaMonthLabel">—</span>
+                </span>
+
+                <button class="btn btn-gold btn-anim btn-cal-nav" onclick="nextMonth()"
+                  aria-label="Próximo mês">▶</button>
+              </div>
+            </div>
+
+            <div class="cal-head">
+              <div>Dom</div>
+              <div>Seg</div>
+              <div>Ter</div>
+              <div>Qua</div>
+              <div>Qui</div>
+              <div>Sex</div>
+              <div>Sáb</div>
+            </div>
+
+            <div id="agendaCalendar" class="calendar"></div>
+
+            <!-- Lista compacta (tablet/celular) -->
+            <div id="agendaCompactList" class="mt-2"></div>
+
+            <div class="mt-3 text-muted small">
+              Eventos incluídos automaticamente quando você agenda aulas ou avaliações.
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-aulas">
+          <div class="card p-4 js-stagger">
+
+            <div class="d-flex gap-2 flex-wrap mb-3">
+              <button class="btn btn-gold btn-anim btn-edit" onclick="setSlotsDay(0)">Hoje</button>
+              <button class="btn btn-gold btn-anim btn-edit" onclick="setSlotsDay(1)">+1 dia</button>
+              <button class="btn btn-gold btn-anim btn-edit" onclick="setSlotsDay(2)">+2 dias</button>
+            </div>
+
+            <span class="badge-pill mb-3 d-inline-flex">Dia selecionado: <span class="ms-2"
+                id="slotsDayLabel">—</span></span>
+
+            <div id="classSlots"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-avaliacao">
+          <div class="card p-4 js-stagger">
+
+
+            <div class="d-flex gap-2 flex-wrap mb-3">
+              <button class="btn btn-gold btn-anim btn-edit" onclick="setAssessDay(3)">+3 dias</button>
+              <button class="btn btn-gold btn-anim btn-edit" onclick="setAssessDay(4)">+4 dias</button>
+              <button class="btn btn-gold btn-anim btn-edit" onclick="setAssessDay(5)">+5 dias</button>
+            </div>
+
+            <span class="badge-pill mb-3 d-inline-flex">Dia selecionado: <span class="ms-2"
+                id="assessDayLabel">—</span></span>
+
+            <div id="assessSlots"></div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- MODAL NOTA FISCAL (Fake) -->
+  <div class="modal fade" id="invoiceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Nota Fiscal (Fake)</h5>
+            <div class="text-muted small" id="invSubtitle">Pedido —</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div id="invBody" class="small"></div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Fechar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" onclick="alert('Baixando PDF...')">Baixar PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFCANVAS (mobile menu) -->
+  <div class="offcanvas offcanvas-start offcanvas-premium" tabindex="-1" id="mobileMenu"
+    aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header">
+      <div>
+        <div id="mobileMenuLabel" class="mobile-menu-title">Menu</div>
+        <div class="small text-muted">Navegação rápida</div>
+      </div>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="nav-rail" id="navRailMobile"></div>
+      <hr style="border-color: rgba(255,255,255,.12);">
+      <button class="btn btn-soft btn-anim w-100 h46" onclick="logout()" data-ripple-bound="1">
+        <i class="bi bi-box-arrow-right me-2"></i>Sair
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL PERFIL -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <h5 class="fw-bold mb-3">Editar Perfil</h5>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label text-muted">Nome</label>
+            <input id="inpName" class="form-control bg-black text-white form-premium" disabled>
+            <div class="text-muted small mt-1">Nome não é editável.</div>
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted">Documento (CPF)</label>
+            <input id="inpCpf" class="form-control bg-black text-white form-premium" disabled>
+            <div class="text-muted small mt-1">Documento não é editável.</div>
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted">Email</label>
+            <input id="inpEmail" type="email" class="form-control bg-black text-white form-premium">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Telefone</label>
+            <input id="inpPhone" class="form-control bg-black text-white form-premium">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Nacionalidade</label>
+            <input id="inpNacionalidade" class="form-control bg-black text-white form-premium" placeholder="Ex.: Brasileira">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Nascimento</label>
+            <input id="inpNascimento" type="date" class="form-control bg-black text-white form-premium">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Gênero</label>
+            <select id="inpGenero" class="form-select bg-black text-white form-premium">
+              <option value="">Selecione</option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted">Endereço</label>
+            <input id="inpEndereco" class="form-control bg-black text-white form-premium" placeholder="Rua, bairro, nº">
+          </div>
+          <div class="col-12">
+            <label class="form-label text-muted">Cidade/Estado</label>
+            <input id="inpCidadeEstado" class="form-control bg-black text-white form-premium" placeholder="Ex.: São Paulo/SP">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Objetivo</label>
+            <input id="inpGoal" class="form-control bg-black text-white form-premium" placeholder="Ex.: Hipertrofia">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Altura (cm)</label>
+            <input id="inpHeight" type="number" class="form-control bg-black text-white form-premium">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-muted">Peso (kg)</label>
+            <input id="inpWeight" type="number" class="form-control bg-black text-white form-premium">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label text-muted">Trocar foto (upload)</label>
+            <input id="inpAvatar" type="file" accept="image/*" class="form-control bg-black text-white form-premium">
+            <div class="text-muted small mt-1">A foto é pré-visualizada localmente (sem enviar servidor).</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveProfile()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PLANO -->
+  <div class="modal fade" id="planModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <h5 class="fw-bold mb-3">Escolha seu Plano</h5>
+
+        <div id="planChoicesContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PAGAMENTO (Histórico) - padrão matrícula -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Pagar mensalidade</h5>
+            <div class="text-muted small">Escolha a forma de pagamento e finalize.</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="text-muted">Total</div>
+          <div class="fw-bold" id="histPayTotalLabel">R$ 0,00</div>
+        </div>
+
+        <div class="d-grid gap-3">
+          <div class="payment-option active" data-pay="pix" onclick="histSelectPay('pix')">
+            💠 Pix <span class="text-gold">• pagamento instantâneo</span>
+          </div>
+          <div class="payment-option" data-pay="card" onclick="histSelectPay('card')">
+            💳 Cartão de Crédito
+          </div>
+        </div>
+
+        <!-- PIX -->
+        <div id="histPixFields" class="mt-4">
+          <div class="pix-box">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div>
+                <div class="fw-bold">Pague com Pix</div>
+                <div class="text-muted" style="font-size:.92rem;">
+                  Escaneie o QR Code ou copie o código abaixo.
+                </div>
+              </div>
+              <span class="badge"
+                style="background: rgba(245,180,0,.16); color: rgb(245,180,0); border:1px solid rgba(245,180,0,.28);">
+                Válido por 10 min
+              </span>
+            </div>
+
+            <div class="pix-qr mt-3" id="histPixQr" aria-label="QR Code Pix"></div>
+
+            <div class="mt-3">
+              <label class="text-muted mb-2" style="font-size:.9rem;">Pix Copia e Cola</label>
+              <textarea id="histPixCode" class="form-control pix-code" rows="3" readonly></textarea>
+
+              <div class="btn-wrap">
+                <button id="histCopyPixBtn" type="button" class="btn btn-gold btn-anim btn-fixed px-4"
+                  onclick="histCopyPixCode()">
+                  COPIAR CÓDIGO
+                </button>
+              </div>
+
+              <div id="histCopyFeedback" class="text-muted text-center mt-2" style="font-size:.9rem; display:none;">
+                Código copiado ✅
+              </div>
+
+              <div id="histPixProofWrap" class="mt-3" style="display:none;">
+                <label class="text-muted mb-2" style="font-size:.9rem;">Enviar comprovante do Pix</label>
+                <input id="histPixProof" type="file" accept="image/*,application/pdf" class="form-control" />
+                <div class="text-muted mt-2" style="font-size:.85rem;">
+                  Anexe uma imagem ou PDF do comprovante para finalizar.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARTÃO -->
+        <div id="histCardFields" class="mt-4 d-none">
+          <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+            <div class="text-muted" style="font-size:.9rem;">Cartão de crédito (teste)</div>
+            <button id="histFillFakeCardBtn" type="button" class="btn btn-outline-light btn-sm"
+              style="border-radius:10px;font-weight:800;" onclick="histFillFakeCard()">
+              Usar cartão teste
+            </button>
+          </div>
+
+          <input id="histCardNumber" class="form-control mb-2 bg-black text-white form-premium" placeholder="Número do cartão"
+            inputmode="numeric" autocomplete="cc-number">
+          <div class="row g-2">
+            <div class="col-6">
+              <input id="histCardExp" class="form-control bg-black text-white form-premium" placeholder="MM/AA"
+                inputmode="numeric" autocomplete="cc-exp">
+            </div>
+            <div class="col-6">
+              <input id="histCardCvv" class="form-control bg-black text-white form-premium" placeholder="CVV"
+                inputmode="numeric" autocomplete="cc-csc">
+            </div>
+          </div>
+          <div id="histCardFeedback" class="text-warning small mt-2" style="display:none;">
+            Preencha os dados do cartão (ou use o cartão teste).
+          </div>
+        </div>
+
+        <div id="histPayValidationMsg" class="mini mt-2 text-danger" style="display:none;"></div>
+
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-4 flex-wrap">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button id="histConfirmPayBtn" class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            type="button" onclick="histConfirmPayment()">
+            PAGAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL RASTREIO (Minhas compras) -->
+  <div class="modal fade" id="trackingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Rastreio do pedido</h5>
+            <div class="text-muted small" id="trackingSubtitle">Simule as etapas de entrega.</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div id="trackingBody"></div>
+
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-4 flex-wrap">
+          <button class="btn btn-outline-light" style="border-radius:12px;" type="button" onclick="trackingPrevStep()">
+            Voltar etapa
+          </button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" type="button"
+            onclick="trackingNextStep()">
+            Avançar etapa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DETALHES DO DIA (Agenda) -->
+  <div class="modal fade" id="agendaDayModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1" id="agendaDayTitle">Agenda</h5>
+            <div class="text-muted small" id="agendaDaySub">Detalhes do agendamento.</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div id="agendaDayBody"></div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL AVALIAÇÃO DE PRODUTO -->
+  <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Avaliar Produto</h5>
+            <div class="text-muted small" id="reviewProductName">Produto</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="mb-3">
+          <label class="form-label text-muted mb-2">Avaliação</label>
+          <div class="d-flex gap-2 align-items-center">
+            <span id="reviewStar1" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(1)">☆</span>
+            <span id="reviewStar2" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(2)">☆</span>
+            <span id="reviewStar3" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(3)">☆</span>
+            <span id="reviewStar4" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(4)">☆</span>
+            <span id="reviewStar5" style="font-size:2rem; cursor:pointer; color:#666;" onclick="setReviewRating(5)">☆</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Comentário (opcional)</label>
+          <textarea id="reviewText" class="form-control bg-black text-white form-premium" rows="4" placeholder="Deixe seu comentário sobre o produto..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" onclick="submitReview()">Enviar Avaliação</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SUPORTE -->
+  <div class="modal fade" id="supportModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Suporte</h5>
+            <div class="text-muted small">Pedido: <span id="supportOrderId">—</span></div>
+            <div class="text-muted small">Produto: <span id="supportOrderName">—</span></div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Assunto</label>
+          <input type="text" class="form-control bg-black text-white form-premium" placeholder="Ex.: Problema com entrega">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Mensagem</label>
+          <textarea class="form-control bg-black text-white form-premium" rows="5" placeholder="Descreva seu problema ou dúvida..."></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" onclick="alert('Mensagem enviada! Entraremos em contato em breve.')">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ADICIONAR TREINO -->
+  <div class="modal fade" id="addWorkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Adicionar Treino</h5>
+            <div class="text-muted small">Crie um novo treino</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Título do Treino</label>
+          <input type="text" id="inpNewWorkoutTitle" class="form-control bg-black text-white form-premium" placeholder="Ex.: Musculação — Treino D (Pernas)">
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900" onclick="confirmAddWorkout()">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL REMOVER TREINO -->
+  <div class="modal fade" id="removeWorkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <div class="d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <h5 class="fw-bold mb-1">Remover Treino</h5>
+            <div class="text-muted small">Selecione o treino que deseja remover</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,.10); margin: 14px 0;">
+
+        <div class="mb-3">
+          <label class="form-label text-muted">Treino</label>
+          <select id="selectWorkoutToRemove" class="form-select bg-black text-white form-premium">
+            <option value="">Selecione um treino...</option>
+          </select>
+          <div class="text-muted small mt-1">⚠️ Isso apagará todos os exercícios do treino selecionado</div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-danger btn-anim" style="border-radius:12px;font-weight:900" onclick="confirmRemoveWorkout()">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ MODAL EDITAR/ADICIONAR EXERCÍCIO -->
+  <div class="modal fade" id="exerciseModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white p-3 rounded-4 modal-premium">
+        <h5 class="fw-bold mb-3" id="exerciseModalTitle">Editar Exercício</h5>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label text-muted">Nome do exercício</label>
+            <input id="inpExName" class="form-control bg-black text-white form-premium" placeholder="Ex.: Supino reto">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label text-muted">Séries</label>
+            <input id="inpExSets" type="number" min="1" class="form-control bg-black text-white form-premium"
+              placeholder="Ex.: 4">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label text-muted">Repetições</label>
+            <input id="inpExReps" class="form-control bg-black text-white form-premium"
+              placeholder="Ex.: 10 (ou 30s / 25 min)">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label text-muted">Observação (opcional)</label>
+            <input id="inpExNote" class="form-control bg-black text-white form-premium"
+              placeholder="Ex.: até a falha / zona 2">
+          </div>
+
+          <input type="hidden" id="inpWorkoutKey">
+          <input type="hidden" id="inpExerciseIndex">
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-4">
+          <button class="btn btn-outline-light" style="border-radius:12px;" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-gold btn-anim" style="border-radius:12px;font-weight:900"
+            onclick="saveExercise()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/catalogoPublico.js"></script>
+  <script src="./js/perfilUsuario.js"></script>
+
+</body>
+
+</html>
